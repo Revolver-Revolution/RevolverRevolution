@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>EPK · Revolver Revolution</title>
+<!-- Privado: que no aparezca en buscadores -->
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#0b0d0b">
+<link rel="icon" href="assets/rr.png">
+<style>
+  :root{
+    --bg:#0b0d0b; --panel:#121412; --ink:#f2efe9; --muted:#a9a59c; --dim:#6f6c66;
+    --line:rgba(242,239,233,.13); --red:#e2412f; --violet:#8b5cf6;
+    --wrap:1080px;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;scroll-padding-top:72px}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+  body::after{content:"";position:fixed;inset:-50%;z-index:50;pointer-events:none;opacity:.06;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation:grain 1.2s steps(6) infinite}
+  @keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+  @media (prefers-reduced-motion:reduce){body::after{animation:none}}
+  a{color:inherit}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+  body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+
+  /* nav */
+  nav.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(11,13,11,.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav.top .wrap{display:flex;align-items:center;gap:18px;height:58px}
+  nav.top img{height:30px;width:auto}
+  nav.top ul{list-style:none;display:flex;gap:4px;margin-left:auto;min-width:0;overflow-x:auto;scrollbar-width:none}
+  nav.top ul::-webkit-scrollbar{display:none}
+  nav.top a{display:block;padding:7px 12px;border-radius:999px;font-size:13px;letter-spacing:.06em;color:var(--muted);text-decoration:none;white-space:nowrap}
+  nav.top a:hover,nav.top a.on{color:var(--ink);background:rgba(255,255,255,.06)}
+  nav.top a.dl{color:#0b0d0b;background:var(--ink);font-weight:600}
+
+  /* hero */
+  header.hero{position:relative;min-height:86svh;display:grid;place-items:center;text-align:center;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .bg{position:absolute;inset:0;background:url(assets/hero.jpg) center 40%/cover no-repeat;filter:saturate(.85) brightness(.5);transform:scale(1.06)}
+  .hero .bg::after{content:"";position:absolute;inset:0;background:
+     radial-gradient(60% 50% at 20% 30%,rgba(226,65,47,.28),transparent 70%),
+     radial-gradient(50% 45% at 85% 70%,rgba(139,92,246,.22),transparent 70%),
+     linear-gradient(to bottom,rgba(11,13,11,.2),var(--bg) 96%)}
+  .hero .in{position:relative;padding:80px 20px 60px}
+  .kicker{font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:var(--muted)}
+  .hero img.logo{width:min(560px,86vw);height:auto;margin:22px auto 18px;display:block;filter:drop-shadow(0 6px 30px rgba(0,0,0,.6))}
+  .hero p.tag{font-size:clamp(17px,2.4vw,21px);max-width:620px;margin:0 auto;color:#e4e0d8}
+  .hero .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:26px}
+  .chip{font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:7px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+
+  section{padding:88px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:clamp(28px,4vw,42px);line-height:1.1;letter-spacing:-.01em;margin-bottom:10px}
+  h2 small{display:block;font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--red);font-weight:600;margin-bottom:12px}
+  h3{font-size:19px;margin:30px 0 10px}
+  p.lead{color:#d9d5cd;font-size:18px;max-width:720px}
+  p{color:#cfcbc3}
+  strong{color:var(--ink)}
+
+  /* bio */
+  .bio{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+  .bio figure{position:relative;border-radius:6px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px var(--line)}
+  .bio figure img{display:block;width:100%;height:auto}
+  .bio p+p{margin-top:16px}
+  .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:30px}
+  .facts div{background:var(--panel);padding:16px}
+  .facts b{display:block;font-size:22px}
+  .facts span{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .influ{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+
+  /* music */
+  .rel{display:grid;grid-template-columns:1fr;gap:22px;margin-top:34px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px}
+  .card .lbl{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--red);font-weight:600}
+  .card h3{margin:8px 0 10px;font-size:26px;letter-spacing:.04em}
+  .card p+p{margin-top:12px}
+  .btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 15px;border-radius:999px;border:1px solid var(--line);text-decoration:none;font-size:14px;font-weight:600;background:rgba(255,255,255,.03)}
+  .btn:hover{border-color:rgba(242,239,233,.35);background:rgba(255,255,255,.07)}
+  .btn.pri{background:var(--ink);color:#0b0d0b;border-color:var(--ink)}
+  .card.rel-card{display:grid;grid-template-columns:200px minmax(0,1fr);gap:22px;align-items:start}
+  .cover{position:relative;width:100%;aspect-ratio:1/1;max-width:100%;border-radius:8px;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,.55),0 0 0 1px var(--line)}
+  .cover img,.cover video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .rel-card h3{margin-top:6px}
+
+  /* gallery */
+  .gal{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:30px}
+  .gal a.big{grid-row:span 2;aspect-ratio:auto}
+  .gal a{min-width:0;position:relative;display:block;aspect-ratio:3/4;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+  .gal img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+  .gal a:hover img{transform:scale(1.04)}
+  .gal a span{position:absolute;left:10px;bottom:10px;font-size:12px;padding:5px 10px;border-radius:999px;background:rgba(0,0,0,.6);backdrop-filter:blur(6px)}
+
+  /* rider */
+  .tabs{display:flex;flex-wrap:wrap;gap:6px;margin:30px 0 22px}
+  .tabs button{font:inherit;font-size:14px;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:999px;padding:9px 15px;cursor:pointer}
+  .tabs button[aria-selected="true"]{background:var(--ink);color:#0b0d0b;border-color:var(--ink);font-weight:600}
+  .panel{display:none}
+  .panel.on{display:block;animation:fade .35s}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  ul.list{list-style:none;display:grid;gap:12px;max-width:780px}
+  ul.list li{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:15px 18px}
+  ul.list li em{display:block;color:var(--muted);font-size:14px;margin-top:4px}
+  .tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+  table{width:100%;border-collapse:collapse;min-width:560px}
+  th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);font-size:15px}
+  th{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);background:var(--panel);font-weight:600}
+  tr:last-child td{border-bottom:0}
+  td:first-child{color:var(--red);font-weight:700;width:60px}
+  .plot{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .plot figure{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .plot figure img,.plot svg{display:block;width:100%;height:auto}
+  .plot figcaption{font-size:13px;color:var(--muted);padding:10px 14px;border-top:1px solid var(--line)}
+
+  /* links + contact */
+  .links{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:30px}
+  .links a{min-width:0;display:flex;flex-direction:column;gap:4px;padding:16px;border:1px solid var(--line);border-radius:10px;text-decoration:none;background:var(--panel)}
+  .links a:hover{border-color:rgba(242,239,233,.35)}
+  .links b{font-size:15px}
+  .links span{font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .contact{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}
+  .contact .card b{display:block;font-size:20px;margin:6px 0 12px}
+  .contact .card a{word-break:break-word}
+
+  footer{padding:40px 0 60px;text-align:center;color:var(--dim);font-size:12px;letter-spacing:.08em}
+  footer img{width:28px;opacity:.7;margin-bottom:10px}
+
+  
+
+  @media (max-width:860px){
+    .bio,.rel,.plot{grid-template-columns:1fr}
+    .gal{grid-template-columns:1fr 1fr}
+    .gal a.big{grid-row:auto;grid-column:span 2;aspect-ratio:4/5}
+    .card.rel-card{grid-template-columns:1fr}
+    .rel-card .cover{max-width:340px}
+    .links{grid-template-columns:1fr 1fr}
+    .contact{grid-template-columns:1fr}
+    nav.top img{height:24px}
+    section{padding:64px 0}
+  }
+  @media (max-width:480px){
+    .facts{grid-template-columns:1fr 1fr 1fr}
+    .facts b{font-size:18px}
+    .gal{grid-template-columns:1fr}
+    .gal a,.gal a.big{grid-column:auto;aspect-ratio:4/5}
+  }
+  @media print{
+    body::after,nav.top{display:none}
+    .panel{display:block!important}
+    .tabs{display:none}
+  }
+</style>
+</head>
+<body>
+
+<nav class="top" aria-label="Secciones">
+  <div class="wrap">
+    <a href="#inicio" aria-label="Inicio" style="padding:0;background:none"><img src="assets/logo.png" alt="Revolver Revolution"></a>
+    <ul>
+      <li><a href="#bio">Bio</a></li>
+      <li><a href="#musica">Música</a></li>
+      <li><a href="#fotos">Fotos</a></li>
+      <li><a href="#rider">Rider</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+      <li><a class="dl" href="assets/EPK_Revolver_Revolution.pdf" download>PDF</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="inicio">
+  <div class="bg" aria-hidden="true"></div>
+  <div class="in">
+    <div class="kicker">Electronic Press Kit</div>
+    <img class="logo" src="assets/logo.png" alt="Revolver Revolution">
+    <p class="tag">Power Duo de la CDMX. La furia del Punk con el alma del Classic Rock.</p>
+    <div class="chips">
+      <span class="chip">Indie Rock</span><span class="chip">Classic Rock</span><span class="chip">CDMX</span><span class="chip">Dúo</span>
+    </div>
+  </div>
+</header>
+
+<section id="bio">
+  <div class="wrap bio">
+    <div class="rv">
+      <h2><small>Biografía</small>Un poco de la historia</h2>
+      <p class="lead">De la escuela del Classic Rock y la energía de la CDMX, Revolver Revolution es el dúo que convierte años de complicidad en una propuesta de rock original para el mundo entero.</p>
+      <p style="margin-top:18px"><strong>Revolver Revolution</strong> es la culminación de una trayectoria que comenzó en 2018 en la vibrante escena de la Ciudad de México. Tras años de recorrer escenarios perfeccionando su química como banda de covers y evolucionando a través de distintas alineaciones, sus fundadores, <strong>Leonardo y Erick</strong>, decidieron dar el salto definitivo en 2024 hacia la creación de material original.</p>
+      <p>Con un sonido que rinde tributo a la elegancia de <strong>The Beatles</strong> y <strong>The Last Shadow Puppets</strong>, pero con la energía cruda de <strong>Arctic Monkeys</strong> y el espíritu hipnótico de <strong>Oasis</strong>, este dúo capitalino fusiona el Indie Rock con la esencia del Rock Clásico. Hoy, Revolver Revolution deja atrás las versiones para presentar una propuesta auténtica y universal, con un objetivo claro: que su música sea coreada en cada rincón del mundo.</p>
+      <div class="facts">
+        <div><b>2018</b><span>Inicios</span></div>
+        <div><b>2024</b><span>Material original</span></div>
+        <div><b>CDMX</b><span>Origen</span></div>
+      </div>
+    </div>
+    <figure class="rv"><img src="assets/banda.jpg" alt="Leonardo y Erick, Revolver Revolution" loading="lazy"></figure>
+  </div>
+</section>
+
+<section id="musica">
+  <div class="wrap">
+    <h2 class="rv"><small>Música</small>Lanzamientos</h2>
+    <div class="rel">
+      <article class="card rel-card rv">
+        <div class="cover"><img src="assets/sexo.jpg" alt="Portada de SEXO"><video src="assets/sexo.mp4" poster="assets/sexo.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
+        <div style="min-width:0">
+        <div class="lbl">Nuevo sencillo</div>
+        <h3>SEXO</h3>
+        <p>El sencillo más reciente de Revolver Revolution, disponible en todas las plataformas digitales.</p>
+        <div class="btns">
+          <a class="btn pri" href="https://open.spotify.com/track/1D9rszJfcE6cjGg85FZ75S" target="_blank" rel="noopener">Spotify</a>
+          <a class="btn" href="https://music.apple.com/mx/album/sexo/6825448787?i=6825448788" target="_blank" rel="noopener">Apple Music</a>
+          <a class="btn" href="https://music.youtube.com/watch?v=D0wrPvIOgFw" target="_blank" rel="noopener">YouTube Music</a>
+        </div>
+        </div>
+      </article>
+      <article class="card rel-card rv">
+        <div class="cover"><img src="assets/sparrows.jpg" alt="Portada de SPARROWS"><video src="assets/sparrows.mp4" poster="assets/sparrows.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div>
+        <div style="min-width:0">
+        <div class="lbl">Primer sencillo</div>
+        <h3>SPARROWS</h3>
+        <p><strong>"SPARROWS"</strong> es un recordatorio visceral de nuestra propia caducidad. Con un estribillo que funciona como un mantra de realidad ("You will die"), la canción contrasta la agilidad del mundo natural frente a la pesadez de la espera humana. Es rock existencial servido a máxima velocidad.</p>
+        <p>¿Cómo percibe el tiempo un gorrión comparado con nosotros? Entre guitarras crudas y ritmos directos, Revolver Revolution entrega un himno sobre lo inevitable: el ciclo del sol y el final que todos compartimos.</p>
+        <div class="btns">
+          <a class="btn pri" href="https://music.youtube.com/watch?v=HKxnslLUq5M" target="_blank" rel="noopener">Escuchar</a>
+          <a class="btn" href="https://www.youtube.com/@revolverrevolutionoficial" target="_blank" rel="noopener">Video oficial (YouTube)</a>
+        </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="fotos">
+  <div class="wrap">
+    <h2 class="rv"><small>Prensa</small>Fotos oficiales</h2>
+    <p class="rv">Libres de uso para difusión. Da clic en una foto para descargarla en alta resolución.</p>
+    <div class="gal">
+      <a class="rv big" href="assets/foto3.jpg" download><img src="assets/foto3_web.jpg" alt="Foto de prensa — escalones" loading="lazy"><span>Descargar ↓</span></a>
+      <a class="rv" href="assets/foto2.jpg" download><img src="assets/foto2_web.jpg" alt="Foto de prensa — graffiti, sentados" loading="lazy"><span>Descargar ↓</span></a>
+      <a class="rv" href="assets/foto1.jpg" download><img src="assets/foto1_web.jpg" alt="Foto de prensa — muro, de pie" loading="lazy"><span>Descargar ↓</span></a>
+      <a class="rv" href="assets/foto5.jpg" download><img src="assets/foto5_web.jpg" alt="Foto de prensa — graffiti, mirada lateral" loading="lazy"><span>Descargar ↓</span></a>
+      <a class="rv" href="assets/foto4.jpg" download><img src="assets/foto4_web.jpg" alt="Foto de prensa — muro, de pie 2" loading="lazy"><span>Descargar ↓</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="rider">
+  <div class="wrap">
+    <h2 class="rv"><small>Technical Rider</small>Requerimientos técnicos</h2>
+    <p class="rv"><strong>Banda:</strong> Revolver Revolution (Dúo)</p>
+
+    <div class="tabs" role="tablist" aria-label="Rider técnico">
+      <button role="tab" aria-selected="true" aria-controls="p-backline" id="t-backline">Backline</button>
+      <button role="tab" aria-selected="false" aria-controls="p-input" id="t-input">Input list</button>
+      <button role="tab" aria-selected="false" aria-controls="p-monitor" id="t-monitor">Monitoreo</button>
+      <button role="tab" aria-selected="false" aria-controls="p-extra" id="t-extra">Extras</button>
+      <button role="tab" aria-selected="false" aria-controls="p-plot" id="t-plot">Stage plot</button>
+    </div>
+
+    <div class="panel on" role="tabpanel" id="p-backline" aria-labelledby="t-backline">
+      <p style="margin-bottom:16px">Necesitamos los siguientes amplificadores en el escenario:</p>
+      <ul class="list">
+        <li><strong>Guitarra:</strong> 1 amplificador <strong>Marshall</strong> (Serie DSL o JCM preferentemente) o similar.</li>
+        <li><strong>Teclado:</strong> 1 amplificador <strong>Fender</strong> (Twin Reverb o Frontman preferentemente) o similar.
+          <em>En caso de no contar con amplificador para teclado, requerimos una caja directa (DI Box) de buena calidad.</em></li>
+      </ul>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-input" aria-labelledby="t-input">
+      <p style="margin-bottom:16px">Cables y micrófonos que el ingeniero debe tener listos:</p>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Canal</th><th>Instrumento</th><th>Microfonía / Conexión</th><th>Notas</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Voz 1 (Erick)</td><td>Micrófono Shure SM58 o sim.</td><td>Con stand de brazo largo</td></tr>
+            <tr><td>2</td><td>Voz 2 (Leonardo)</td><td>Micrófono Shure SM58 o sim.</td><td>Con stand de brazo largo</td></tr>
+            <tr><td>3</td><td>Guitarra</td><td>Micrófono Shure SM57 o sim.</td><td>Frente al Marshall</td></tr>
+            <tr><td>4</td><td>Teclado</td><td>Caja directa (DI) o mic</td><td>Según disponibilidad de amp Fender</td></tr>
+            <tr><td>5</td><td>Secuencias (iPad)</td><td>Caja directa (DI) / Plug 1/4"</td><td>Salida desde iPad (L/R o mono)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-monitor" aria-labelledby="t-monitor">
+      <ul class="list">
+        <li>Requerimos al menos <strong>2 mezclas de monitoreo</strong> independientes (una para Leonardo y otra para Erick).</li>
+        <li>Es vital que las <strong>secuencias del iPad</strong> y las <strong>voces</strong> se escuchen con claridad en ambos monitores.</li>
+        <li>Monitoreo de secuencias del iPad (estéreo): <strong>izquierdo = click</strong>, <strong>derecho = pista</strong>.</li>
+      </ul>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-extra" aria-labelledby="t-extra">
+      <ul class="list">
+        <li><strong>Consola:</strong> de al menos 6 canales disponibles.</li>
+        <li><strong>Conexión iPad:</strong> nosotros llevamos el adaptador de iPad, pero requerimos que el lugar proporcione el cable (Plug 1/4") para conectar a la consola / caja directa.</li>
+        <li><strong>Energía:</strong> 2 puntos de corriente (contactos) cerca de la posición de los músicos para pedales e iPad.</li>
+      </ul>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-plot" aria-labelledby="t-plot">
+      <div class="plot">
+        <figure>
+          <svg viewBox="0 0 600 440" role="img" aria-label="Diagrama del escenario">
+            <defs><style>
+              .bx{fill:#1a1d1a;stroke:#f2efe9;stroke-opacity:.55;stroke-width:1.5}
+              .rd{fill:rgba(226,65,47,.14);stroke:#e2412f;stroke-width:1.5}
+              .t{fill:#f2efe9;font:600 12px -apple-system,Segoe UI,Arial,sans-serif;text-anchor:middle;letter-spacing:.04em}
+              .s{fill:#a9a59c;font:500 10px -apple-system,Segoe UI,Arial,sans-serif;text-anchor:middle;letter-spacing:.08em}
+            </style></defs>
+            <rect x="0" y="0" width="600" height="440" fill="#111311"/>
+            <text x="300" y="150" class="s" style="font-size:22px;letter-spacing:.4em;fill:#3a3d39">ESCENARIO</text>
+            <rect class="bx" x="60" y="30" width="170" height="64" rx="4"/><text class="t" x="145" y="66">AMP MARSHALL</text>
+            <rect class="bx" x="370" y="30" width="170" height="64" rx="4"/><text class="t" x="455" y="66">AMP FENDER</text>
+            <rect class="bx" x="50" y="170" width="120" height="40" rx="4"/><text class="s" x="110" y="194">SOPORTE 5 GUITARRAS</text>
+            <rect class="bx" x="110" y="240" width="80" height="26" rx="13"/><text class="s" x="150" y="257">ERICK</text>
+            <rect class="bx" x="215" y="232" width="56" height="40" rx="4"/><text class="s" x="243" y="250">IPAD</text><text class="s" x="243" y="263">TRIPIE</text>
+            <rect class="bx" x="100" y="285" width="100" height="26" rx="4"/><text class="s" x="150" y="302">PEDALERA</text>
+            <circle class="rd" cx="150" cy="332" r="10"/><text class="s" x="150" y="358">MIC 1</text>
+            <g transform="translate(375 230) rotate(38)"><rect class="bx" x="-60" y="-14" width="120" height="28" rx="4"/><text class="s" x="0" y="4">TECLADO 1</text></g>
+            <g transform="translate(500 240) rotate(-40)"><rect class="bx" x="-50" y="-13" width="100" height="26" rx="4"/><text class="s" x="0" y="4">TECLADO 2</text></g>
+            <rect class="bx" x="405" y="200" width="80" height="26" rx="13"/><text class="s" x="445" y="217">LEONARDO</text>
+            <circle class="rd" cx="445" cy="300" r="10"/><text class="s" x="445" y="326">MIC 2</text>
+            <rect class="rd" x="70" y="368" width="170" height="40" rx="4"/><text class="t" x="155" y="393">MONITOR 1</text>
+            <rect class="rd" x="360" y="368" width="170" height="40" rx="4"/><text class="t" x="445" y="393">MONITOR 2</text>
+            <rect x="30" y="418" width="540" height="5" rx="2.5" fill="#f2efe9"/>
+            <text class="s" x="300" y="437" style="font-size:9px">— PÚBLICO —</text>
+          </svg>
+          <figcaption>Diagrama de escenario (vista superior)</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/escenario.jpg" alt="Referencia visual del montaje en escenario" loading="lazy">
+          <figcaption>Referencia visual del montaje</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="links">
+  <div class="wrap">
+    <h2 class="rv"><small>Enlaces</small>Plataformas y redes</h2>
+    <div class="links">
+      <a class="rv" href="https://open.spotify.com/artist/0UbOwb9YvrTa2eMsA8CfX5" target="_blank" rel="noopener"><b>Spotify</b><span>Revolver Revolution</span></a>
+      <a class="rv" href="https://music.apple.com/mx/artist/revolver-revolution/1870969894" target="_blank" rel="noopener"><b>Apple Music</b><span>Revolver Revolution</span></a>
+      <a class="rv" href="https://music.amazon.com.mx/artists/B0GJ3CJCMT/revolver-revolution" target="_blank" rel="noopener"><b>Amazon Music</b><span>Revolver Revolution</span></a>
+      <a class="rv" href="https://music.youtube.com/watch?v=HKxnslLUq5M" target="_blank" rel="noopener"><b>YouTube Music</b><span>Sparrows</span></a>
+      <a class="rv" href="https://www.instagram.com/revolverrevolution.oficial/" target="_blank" rel="noopener"><b>Instagram</b><span>@revolverrevolution.oficial</span></a>
+      <a class="rv" href="https://www.tiktok.com/@revolver_revolutionband" target="_blank" rel="noopener"><b>TikTok</b><span>@revolver_revolutionband</span></a>
+      <a class="rv" href="https://www.youtube.com/@revolverrevolutionoficial" target="_blank" rel="noopener"><b>YouTube</b><span>@revolverrevolutionoficial</span></a>
+      <a class="rv" href="https://www.facebook.com/profile.php?id=61574935286375" target="_blank" rel="noopener"><b>Facebook</b><span>Revolver Revolution</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="wrap">
+    <h2 class="rv"><small>Booking</small>Contacto</h2>
+    <div class="contact">
+      <div class="card rv"><div class="lbl">Correo</div><b>Booking &amp; prensa</b><a class="btn pri" href="mailto:revolverrevolution4@gmail.com">revolverrevolution4@gmail.com</a></div>
+      <div class="card rv"><div class="lbl">Teléfono</div><b>Erick Carrizales</b><div class="btns" style="margin-top:0"><a class="btn" href="tel:+525611723593">56 1172 3593</a><a class="btn" href="https://wa.me/525611723593" target="_blank" rel="noopener">WhatsApp</a></div></div>
+      <div class="card rv"><div class="lbl">Teléfono</div><b>Leonardo Torres</b><div class="btns" style="margin-top:0"><a class="btn" href="tel:+525540117845">55 4011 7845</a><a class="btn" href="https://wa.me/525540117845" target="_blank" rel="noopener">WhatsApp</a></div></div>
+    </div>
+    <div class="btns rv" style="margin-top:28px"><a class="btn pri" href="assets/EPK_Revolver_Revolution.pdf" download>Descargar EPK en PDF ↓</a></div>
+  </div>
+</section>
+
+<footer>
+  <img src="assets/rr.png" alt=""><br>
+  © Revolver Revolution · Material de prensa de uso privado
+</footer>
+
+<script>
+  // Pestañas del rider
+  var tabs=[].slice.call(document.querySelectorAll('[role="tab"]'));
+  function sel(t){
+    tabs.forEach(function(b){
+      var on=b===t; b.setAttribute('aria-selected',on); b.tabIndex=on?0:-1;
+      document.getElementById(b.getAttribute('aria-controls')).classList.toggle('on',on);
+    });
+  }
+  tabs.forEach(function(b,i){
+    b.addEventListener('click',function(){sel(b)});
+    b.addEventListener('keydown',function(e){
+      var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;
+      if(d){var n=tabs[(i+d+tabs.length)%tabs.length]; sel(n); n.focus();}
+    });
+  });
+  // Menú: marcar la sección visible
+  var links=[].slice.call(document.querySelectorAll('nav.top ul a[href^="#"]'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))});
+  window.addEventListener('scroll',function(){
+    var y=window.scrollY+120, cur=null;
+    secs.forEach(function(s,i){ if(s && s.offsetTop<=y) cur=i; });
+    links.forEach(function(a,i){ a.classList.toggle('on',i===cur); });
+  },{passive:true});
+</script>
+</body>
+</html>
